@@ -25,6 +25,9 @@ def unique_words(histogram):
     For example, when given the histogram for The Adventures of Sherlock Holmes, 
     it returns the integer 8475.
     '''
+    for key, value in histogram.items():
+        if value == 1:
+            count += 1
     return len(histogram)
 
 def frequency():
@@ -34,6 +37,9 @@ def frequency():
     For example, when given the word "mystery" and the Holmes histogram, 
     it will return the integer 20.
     '''
+    for key, value in histogram.items():
+        if word in key:
+            return value
 
 def clean_document(source_text):
     '''
