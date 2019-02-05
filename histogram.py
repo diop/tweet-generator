@@ -10,7 +10,13 @@ def histogram(source_text):
     and return a histogram data structure that stores each unique word 
     along with the number of times the word appears in the source text.
     '''
+    histogram = {}
+    for word in source_text:
+        if word not in histogram:
+            histogram[word] = 0
+        histogram[word] += 1
     
+    return histogram
 
 def unique_words(histogram):
     '''
@@ -41,7 +47,7 @@ def save_histogram_disk(filen_name, histogram):
     '''
 
 def main():
-    with open(source_text, 'r') as f:
+    with open(twenty_thosusand_words.txt, 'r') as f:
         words_document = f.read()
 
     cleaned_words = clean_document(words_document)
