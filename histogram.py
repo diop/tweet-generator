@@ -3,6 +3,22 @@
 
 import re
 
+def prune(source_text):
+    '''
+    Cleanes the source text document.
+    '''
+    removed_new_lines = source_text.replace('\n', '')
+    removed_commas = removed_new_lines.replace(', ', ' ')
+    removed_periods = removed_commas.replace('.', ' ')
+    pruned_source_text = removed_periods.split(' ')
+
+    for word in pruned_source_text:
+        if word == '':
+            pruned_source_text.remove(word)
+        return pruned_source_text
+    
+    return pruned_source_text
+
 def histogram(source_text):
     '''
     A histogram() function which takes a source_text argument 
@@ -10,13 +26,36 @@ def histogram(source_text):
     and return a histogram data structure that stores each unique word 
     along with the number of times the word appears in the source text.
     '''
+    text_body = ''
     histogram = {}
-    for word in source_text:
+    with open(source_text, 'r') as f:
+        text_body = f.read()
+    
+    text_body = prune(text_body)
+
+    for word in text_body:
         if word not in histogram:
             histogram[word] = 0
         histogram[word] += 1
     
     return histogram
+
+def histogram_dictionary(source_text):
+    text_body = ''
+    with open(source_text, 'r') as f:
+        text_body = f.read()
+    
+    text_body = prune(text_body)
+    print(text_body)
+    
+    dictogram = {}
+    for word in text_body:
+        if word in dictogram:
+            dictogram[word] += 1
+        else:
+            dictogram[word] = 1
+    
+    return dictogram
 
 def unique_words(histogram):
     '''
@@ -25,43 +64,42 @@ def unique_words(histogram):
     For example, when given the histogram for The Adventures of Sherlock Holmes, 
     it returns the integer 8475.
     '''
-    for key, value in histogram.items():
-        if value == 1:
-            count += 1
+    # for key, value in histogram.items():
+    #     if value == 1:
+    #         count += 1
     return len(histogram)
 
-def frequency():
+def frequency(word, histogram):
     '''
     A frequency() function that takes a word and histogram argument and 
     returns the number of times that word appears in a text. 
     For example, when given the word "mystery" and the Holmes histogram, 
     it will return the integer 20.
     '''
-    for key, value in histogram.items():
-        if word in key:
-            return value
+    # for key, value in histogram.items():
+    #     if word in key:
+    #         return value
+    return histogram[word]
 
-def clean_document(source_text):
-    '''
-    Cleanes the source text document.
-    '''
-
-def save_histogram_disk(filen_name, histogram):
+def save_histogram_disk(file_name, histogram):
     '''
     Takes a file name and a histogram then
     Writes a file to disk.
     '''
+    with open(file_name, w) as f:
+        for word in histogram:
+            f.write(word + ' ' + str(histogram[word]) + '\n')
 
-def main():
-    with open(twenty_thosusand_words.txt, 'r') as f:
-        words_document = f.read()
+# def main():
+#     with open(twenty_thosusand_words.txt, 'r') as f:
+#         words_document = f.read()
 
-    cleaned_words = clean_document(words_document)
-    new_histogram = generate_dict(cleaned_words)
-    new_unique_words = unique_words(new_histogram)
+#     cleaned_words = clean_document(words_document)
+#     new_histogram = generate_dict(cleaned_words)
+#     new_unique_words = unique_words(new_histogram)
 
-    print(new_histogram)
-    print(new_unique_words)
+#     print(new_histogram)
+#     print(new_unique_words)
 
-if __name__ = '__main__'
-    main()
+if __name__ == '__main__':
+    print(histogram_dictionary('african_proverbs.txt'))
