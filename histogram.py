@@ -12,13 +12,16 @@ def prune(source_text):
     removed_periods = removed_commas.replace('.', ' ')
     pruned_source_text = removed_periods.split(' ')
 
+    for index in range(len(pruned_source_text)):
+        word = pruned_source_text[index].lower()
+        pruned_source_text[index] = word
+
     for word in pruned_source_text:
         if word == '':
             pruned_source_text.remove(word)
-        return pruned_source_text
-    
-    return pruned_source_text
 
+    return pruned_source_text
+    
 def histogram(source_text):
     '''
     A histogram() function which takes a source_text argument 
@@ -46,7 +49,6 @@ def histogram_dictionary(source_text):
         text_body = f.read()
     
     text_body = prune(text_body)
-    print(text_body)
     
     dictogram = {}
     for word in text_body:
@@ -89,17 +91,6 @@ def save_histogram_disk(file_name, histogram):
     with open(file_name, w) as f:
         for word in histogram:
             f.write(word + ' ' + str(histogram[word]) + '\n')
-
-# def main():
-#     with open(twenty_thosusand_words.txt, 'r') as f:
-#         words_document = f.read()
-
-#     cleaned_words = clean_document(words_document)
-#     new_histogram = generate_dict(cleaned_words)
-#     new_unique_words = unique_words(new_histogram)
-
-#     print(new_histogram)
-#     print(new_unique_words)
 
 if __name__ == '__main__':
     print(histogram_dictionary('african_proverbs.txt'))
