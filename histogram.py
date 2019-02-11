@@ -1,5 +1,6 @@
 # Handle reading and writing source text file to drive.
 # use regular expression to remove number + period in fron of every text block.
+# Code attribution for Tuples List: https://github.com/erikbatista42/Tweet-Generator/blob/master/histograms.py
 
 import re
 
@@ -56,8 +57,27 @@ def histogram_dictionary(source_text):
             dictogram[word] += 1
         else:
             dictogram[word] = 1
-    
     return dictogram
+
+def list_histogram(word_list):
+    main_list = []
+    for index in range(len(word_list)):
+        temp_list = [word_list[index], word_list.count(word_List[index])]
+        if temp_list in main_list:
+            word_index += 1
+        else:
+            main_list.append([word_list[index]], word_list.count(word_list.count(word_list[index])))
+    return main_list
+
+def tuples_histogram(word_list):
+    main_list = []
+    for index in range(len(word_list)):
+        temp_tuples = (word_list[index], word_list.count(word_list[index]))
+        if temp_tuples in main_list:
+            word_index += 1
+        else:
+            main_list.append((word_list[word_index], word_list.count(word_list[index])))
+        return main_list
 
 def unique_words(histogram):
     '''
