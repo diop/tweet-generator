@@ -7,7 +7,7 @@ proverbs = ('Only a fool tests the depth of a river with both feet',
           'A restless foot may walk into a snake pit',
           'A chick that will grow into a cock can be spotted the very day it hatches.',
           'After a foolish deed comes remorse',
-          'A roaring lion kills no game',s
+          'A roaring lion kills no game',
           'If a child washes his hands he could eat with kings',
           'Rain does not fall on one roof alone',
           'Life is like a shadow and a mist; it passes quickly by, and is no more',
@@ -18,6 +18,6 @@ def random_african_proverb():
     rand_index = random.randint(0, len(proverbs) - 1)
     return proverbs[rand_index]
     
-if '__name__' == '__main__':
+if __name__ == '__main__':
     proverb = random_african_proverb()
     print(proverb)
